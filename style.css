@@ -1,0 +1,265 @@
+/* ===== 1. Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle, #182b38, #08111d);
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* ===== 2. Circle ===== */
+.scene {
+    position: relative;
+    width: min(630px, 94vw, 94svh);
+    aspect-ratio: 1 / 1;
+    perspective: 1000px;
+
+    /* اندازه‌گیری اجزا بر اساس عرض دایره */
+    container-type: inline-size;
+}
+
+/* ===== 3. Neon Ring ===== */
+.none-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+        #00ffff 0%,
+        #00ffff 70%,
+        #006cff 79%,
+        #ff00e6 86%,
+        #00ffff 93%,
+        #00ffff 100%
+    );
+    filter: drop-shadow(0 0 2.2cqw #00ffff);
+    animation: ringRotate 3s linear infinite;
+    pointer-events: none;
+}
+
+.none-ring::after {
+    content: "";
+    position: absolute;
+    inset: 0.65cqw;
+    border-radius: 50%;
+    background: #101c28;
+}
+
+@keyframes ringRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== 4. Rotating Card ===== */
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.card.signup-mode {
+    transform: rotateY(180deg);
+}
+
+/* ===== 5. Both Forms ===== */
+.face {
+    position: absolute;
+    inset: 0;
+    padding: 5cqw 9cqw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+/* ===== 6. Heading ===== */
+.face h2 {
+    font-size: 5.1cqw;
+    line-height: 1.2;
+    color: #76ffef;
+    text-align: center;
+    text-shadow: 0 0 1.3cqw #00ffff80;
+}
+
+/* ===== 7. Paragraphs ===== */
+.face p {
+    font-size: 2.25cqw;
+    line-height: 1.4;
+    color: #91a6b4;
+    margin: 1.2cqw 0 3.2cqw;
+    text-align: center;
+}
+
+/* ===== 8. Input Fields ===== */
+.face > input {
+    display: block;
+    flex-shrink: 0;
+    width: 100%;
+    height: 8.3cqw;
+    margin-bottom: 2.5cqw;
+    padding: 0 3.2cqw;
+    border: 0.32cqw solid #15232e;
+    border-radius: 6cqw;
+    outline: none;
+
+    background: #050f18;
+    color: #d8e9ef;
+    font-family: Arial, sans-serif;
+    font-size: 2.55cqw;
+
+    box-shadow: inset 0 0.5cqw 1.3cqw #0008;
+
+    transition: border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.face > input::placeholder {
+    color: #91a6b4;
+}
+
+.face > input:focus {
+    border-color: #62ffe0;
+    box-shadow:
+        inset 0 0 2cqw #00ffff30,
+        0 0 1.5cqw #00ffff40;
+}
+
+/* ===== 9. Remember Me ===== */
+.options {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1cqw;
+    font-size: 2.05cqw;
+    margin-bottom: 3.8cqw;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 1cqw;
+    color: #91a6b4;
+    white-space: nowrap;
+}
+
+.options input[type="checkbox"] {
+    width: 2.5cqw;
+    height: 2.5cqw;
+    accent-color: #00d9cc;
+    cursor: pointer;
+}
+
+.options a {
+    white-space: nowrap;
+}
+
+/* ===== 10. Buttons ===== */
+.face button {
+    flex-shrink: 0;
+    width: 100%;
+    min-height: 8.5cqw;
+    padding: 1cqw;
+    border: 0.32cqw solid #39867f;
+    border-radius: 6cqw;
+
+    background: linear-gradient(90deg, #123442, #102535);
+    color: #dffeff;
+    font-family: Arial, sans-serif;
+    font-size: 2.8cqw;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.2s ease;
+}
+
+.face button:hover {
+    border-color: #52d9c3;
+    box-shadow: 0 0 2.8cqw #00ffff80;
+}
+
+.face button:active {
+    transform: scale(0.97);
+}
+
+/* ===== 11. Links ===== */
+.face a {
+    color: #6bffe1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.face a:hover {
+    text-shadow: 0 0 1.3cqw #00ffff;
+}
+
+/* ===== 12. Bottom Text ===== */
+.face p:last-child {
+    margin: 3cqw 0 0;
+    font-size: 2.15cqw;
+}
+
+/* ===== 13. Small Screens ===== */
+@media (max-width: 350px) {
+    .face {
+        padding: 4cqw 8cqw;
+    }
+
+    .face h2 {
+        font-size: 5cqw;
+    }
+
+    .face p {
+        margin-top: 1cqw;
+        margin-bottom: 2.5cqw;
+    }
+
+    .face > input {
+        margin-bottom: 2cqw;
+    }
+
+    .options {
+        margin-bottom: 3cqw;
+    }
+
+    .face p:last-child {
+        margin-top: 2.5cqw;
+    }
+}
+
+/* ===== 14. Short Screens ===== */
+@media (max-height: 500px) {
+    .scene {
+        width: min(82vw, 88svh, 630px);
+    }
+}
+
+/* ===== 15. Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    .none-ring {
+        animation: none;
+    }
+
+    .card {
+        transition: none;
+    }
+}
